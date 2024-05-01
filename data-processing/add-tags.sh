@@ -1,23 +1,23 @@
 #!/bin/bash
 
 cat ../train.for-deen.ner.spm.de | spm_decode --model=../deen-ner.model | awk '{print "entity translate German to English:", $0}' > processing/file.1.src
-cat ../train.for-deen.ner.spm.en | spm_decode --model=../deen-ner.model | ./untag.sh > processing/file.1.trg
+cat ../train.for-deen.ner.spm.en | spm_decode --model=../deen-ner.model | ./remove-tags.sh > processing/file.1.trg
 cat ../train.for-ende.ner.spm.en | spm_decode --model=../ende-ner.model | awk '{print "entity translate English to German:", $0}' > processing/file.2.src
-cat ../train.for-ende.ner.spm.de | spm_decode --model=../ende-ner.model | ./untag.sh > processing/file.2.trg
+cat ../train.for-ende.ner.spm.de | spm_decode --model=../ende-ner.model | ./remove-tags.sh > processing/file.2.trg
 
-cat ../train.for-deen.ner.spm.en | spm_decode --model=../deen-ner.model | awk '{print "recognize English named entities:", $0}' | ./untag.sh > processing/file.5.src 
+cat ../train.for-deen.ner.spm.en | spm_decode --model=../deen-ner.model | awk '{print "recognize English named entities:", $0}' | ./remove-tags.sh > processing/file.5.src 
 spm_decode --model=../deen-ner.model < ../train.for-deen.ner.spm.en > processing/file.5.trg
-cat ../train.for-ende.ner.spm.de | spm_decode --model=../ende-ner.model | awk '{print "recognize German named entities:", $0}' | ./untag.sh > processing/file.6.src 
+cat ../train.for-ende.ner.spm.de | spm_decode --model=../ende-ner.model | awk '{print "recognize German named entities:", $0}' | ./remove-tags.sh > processing/file.6.src 
 spm_decode --model=../ende-ner.model < ../train.for-ende.ner.spm.de > processing/file.6.trg
 
 cp processing/file.1.trg processing/file.9.trg
 cp processing/file.2.trg processing/file.10.trg
-cat ../train.for-deen.ner.spm.de | spm_decode --model=../deen-ner.model | awk '{print "translate German to English:", $0}' | ./untag.sh > processing/file.9.src
-cat ../train.for-ende.ner.spm.en | spm_decode --model=../ende-ner.model | awk '{print "translate English to German:", $0}' | ./untag.sh > processing/file.10.src
+cat ../train.for-deen.ner.spm.de | spm_decode --model=../deen-ner.model | awk '{print "translate German to English:", $0}' | ./remove-tags.sh > processing/file.9.src
+cat ../train.for-ende.ner.spm.en | spm_decode --model=../ende-ner.model | awk '{print "translate English to German:", $0}' | ./remove-tags.sh > processing/file.10.src
 
-cat ../train.for-deen.ner.spm.de | spm_decode --model=../deen-ner.model | awk '{print "recognize German named entities:", $0}' | ./untag.sh > processing/file.13.src
+cat ../train.for-deen.ner.spm.de | spm_decode --model=../deen-ner.model | awk '{print "recognize German named entities:", $0}' | ./remove-tags.sh > processing/file.13.src
 spm_decode --model=../deen-ner.model < ../train.for-deen.ner.spm.de > processing/file.13.trg
-cat ../train.for-ende.ner.spm.en | spm_decode --model=../ende-ner.model | awk '{print "recognize English named entities:", $0}' | ./untag.sh > processing/file.14.src
+cat ../train.for-ende.ner.spm.en | spm_decode --model=../ende-ner.model | awk '{print "recognize English named entities:", $0}' | ./remove-tags.sh > processing/file.14.src
 spm_decode --model=../ende-ner.model < ../train.for-ende.ner.spm.en > processing/file.14.trg
 
 
