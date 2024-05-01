@@ -1,4 +1,4 @@
-# instruction-ner-mt-t5
+# Multi-task NER-MT-T5
 Fine-tuning T5 with instructions for named entity recognition and entity-aware machine translation
 
  * Use scripts in the `data-processing` directory to prepare training, development and evaluation data
